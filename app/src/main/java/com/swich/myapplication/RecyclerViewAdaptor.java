@@ -1,7 +1,9 @@
 package com.swich.myapplication;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,14 +32,14 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
     private  ArrayList<String> mPhone=new ArrayList<>();
     private Context mContex;
 
-    public RecyclerViewAdaptor( Context mContex,ArrayList<String> mImageNames, ArrayList<String> mImages,ArrayList<String> mType,ArrayList<String> mDuration,ArrayList<String> mDate,ArrayList<String>mPhone ) {
+    public RecyclerViewAdaptor( Context mContex,ArrayList<String> mImageNames, ArrayList<String> mImages,ArrayList<String> mType,ArrayList<String> mDuration,ArrayList<String> mDate ) {
         this.mImageNames = mImageNames;
         this.mImages = mImages;
         this.mContex = mContex;
         this.mType=mType;
         this.mDate=mDate;
         this.mDuration=mDuration;
-        this.mPhone=mPhone;
+
     }
 
     @NonNull
@@ -55,7 +57,12 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
                 .asBitmap()
                 .load(mImages.get(position))
                 .into(holder.image);
-        holder.imageName.setText(mImageNames.get(position));
+        String name=getContactName(mImageNames.get(position),mContex);
+        if(!name.equals("")) {
+            holder.imageName.setText(name);
+        }else{
+            holder.imageName.setText(mImageNames.get(position));
+        }
         holder.duration.setText(mDuration.get(position));
         holder.type.setText(mType.get(position));
         holder.date.setText(mDate.get(position));
@@ -64,10 +71,30 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"oncliked ok"+mImageNames.get(position)  );
-                String dial = "tel:" + mPhone.get(position);
+                String dial = "tel:" + mImageNames.get(position);
                 mContex.startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
             }
         });
+    }
+
+    public String getContactName(final String phoneNumber, Context context)
+    {
+        Uri uri=Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,Uri.encode(phoneNumber));
+
+        String[] projection = new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME};
+
+
+        String contactName="";
+        Cursor cursor=context.getContentResolver().query(uri,projection,null,null,null);
+
+        if (cursor != null) {
+            if(cursor.moveToFirst()) {
+                contactName=cursor.getString(0);
+            }
+            cursor.close();
+        }
+
+        return contactName;
     }
 
     @Override
@@ -93,7 +120,11 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
             date=itemView.findViewById(R.id.date);
 
         }
+
+
     }
+
+
 }
 
 

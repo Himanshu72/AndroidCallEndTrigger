@@ -46,7 +46,7 @@ private static final int PERMISSINOS_STATE=1240;
     private ArrayList<String> mtype=new ArrayList<>();
     private ArrayList<String> mdate=new ArrayList<>();
     private ArrayList<String> mduration=new ArrayList<>();
-    private ArrayList<String> mPhone=new ArrayList<>();
+   
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +127,7 @@ if(checkAndRequestPermissions()){
 
     private  void  initRecyclerView(){
         RecyclerView recyler=findViewById(R.id.recycler_view);
-        RecyclerViewAdaptor adaptor=new RecyclerViewAdaptor(this,mNames,mImageUrls,mtype,mduration,mdate,mPhone);
+        RecyclerViewAdaptor adaptor=new RecyclerViewAdaptor(this,mNames,mImageUrls,mtype,mduration,mdate);
         recyler.setAdapter(adaptor);
         recyler.setLayoutManager(new LinearLayoutManager(this));
 
@@ -165,14 +165,7 @@ if(checkAndRequestPermissions()){
                     break;
             }
             mImageUrls.add("https://upload.wikimedia.org/wikipedia/commons/b/b7/Google_Contacts_logo.png");
-            String name=getContactName(phNumber,this);
-            if(!name.equals("")) {
-
-                mNames.add(name);
-            }else{
-                mNames.add(phNumber);
-            }
-            mPhone.add(phNumber);
+            mNames.add(phNumber);
             mtype.add(dir);
             mdate.add(strDate);
 
@@ -195,23 +188,5 @@ if(checkAndRequestPermissions()){
         initRecyclerView();
     }
 
-    public String getContactName(final String phoneNumber, Context context)
-    {
-        Uri uri=Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,Uri.encode(phoneNumber));
 
-        String[] projection = new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME};
-
-
-        String contactName="";
-        Cursor cursor=context.getContentResolver().query(uri,projection,null,null,null);
-
-        if (cursor != null) {
-            if(cursor.moveToFirst()) {
-                contactName=cursor.getString(0);
-            }
-            cursor.close();
-        }
-
-        return contactName;
-    }
 }
