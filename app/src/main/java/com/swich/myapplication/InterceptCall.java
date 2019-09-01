@@ -15,24 +15,13 @@ public class InterceptCall extends BroadcastReceiver {
         String state=intent.getStringExtra(TelephonyManager.EXTRA_STATE);
         try{
                if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE)) {
-                   Toast.makeText(context, "phone Ended", Toast.LENGTH_LONG).show();
-                   new AlertDialog.Builder(context.getApplicationContext())
-                           .setIcon(android.R.drawable.ic_dialog_alert).
-                           setTitle("call Drop?").
-                           setMessage("is this a call drop")
-                           .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                               @Override
-                               public void onClick(DialogInterface dialog, int which) {
-                                   Toast.makeText(context.getApplicationContext(),"yes",Toast.LENGTH_SHORT).show();
-                               }
-                           }).setNegativeButton("no",new DialogInterface.OnClickListener() {
-                       @Override
-                       public void onClick(DialogInterface dialog, int which) {
-                           Toast.makeText(context.getApplicationContext(),"no",Toast.LENGTH_SHORT).show();
-                       }
-                   }).show();
+                   //Toast.makeText(context, "phone Ended", Toast.LENGTH_LONG).show();
+                   //initImageBitmaps()
+                   final Intent intents = new Intent(context, Popup.class);
 
-
+                   intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   intents.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                   context.startActivity(intents);
 
                }
         }catch (Exception e){

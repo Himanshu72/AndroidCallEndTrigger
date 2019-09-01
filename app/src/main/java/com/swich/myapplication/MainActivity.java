@@ -11,6 +11,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -35,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
     String[] appPermissions={
         Manifest.permission.READ_PHONE_STATE,
         Manifest.permission.READ_CALL_LOG,
-        Manifest.permission.READ_CONTACTS,
-            
+        Manifest.permission.READ_CONTACTS
 };
 private static final int PERMISSINOS_STATE=1240;
 
@@ -46,7 +46,7 @@ private static final int PERMISSINOS_STATE=1240;
     private ArrayList<String> mtype=new ArrayList<>();
     private ArrayList<String> mdate=new ArrayList<>();
     private ArrayList<String> mduration=new ArrayList<>();
-   
+
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +59,8 @@ if(checkAndRequestPermissions()){
     //textView = (TextView) findViewById(R.id.textview_call);
     getCallDetails();
     //initImageBitmaps();
+    final Intent intents = new Intent(this, Popup.class);
+
 
 }
 
@@ -134,7 +136,6 @@ if(checkAndRequestPermissions()){
     }
 
      public void getCallDetails() {
-        StringBuffer sb = new StringBuffer();
         Cursor managedCursor = managedQuery(CallLog.Calls.CONTENT_URI, null, null, null, CallLog.Calls.DATE + " DESC");
         int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
         int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
