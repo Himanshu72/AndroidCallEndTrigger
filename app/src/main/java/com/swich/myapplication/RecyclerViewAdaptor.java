@@ -1,5 +1,7 @@
 package com.swich.myapplication;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,16 +27,17 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
     private ArrayList<String>  mType=new ArrayList<>();
     private ArrayList<String> mDuration=new ArrayList<>();
     private ArrayList<String>  mDate=new ArrayList<>();
+    private  ArrayList<String> mPhone=new ArrayList<>();
     private Context mContex;
 
-    public RecyclerViewAdaptor( Context mContex,ArrayList<String> mImageNames, ArrayList<String> mImages,ArrayList<String> mType,ArrayList<String> mDuration,ArrayList<String> mDate ) {
+    public RecyclerViewAdaptor( Context mContex,ArrayList<String> mImageNames, ArrayList<String> mImages,ArrayList<String> mType,ArrayList<String> mDuration,ArrayList<String> mDate,ArrayList<String>mPhone ) {
         this.mImageNames = mImageNames;
         this.mImages = mImages;
         this.mContex = mContex;
         this.mType=mType;
         this.mDate=mDate;
         this.mDuration=mDuration;
-
+        this.mPhone=mPhone;
     }
 
     @NonNull
@@ -61,8 +64,8 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"oncliked ok"+mImageNames.get(position)  );
-                Toast.makeText(mContex,mImageNames.get(position),Toast.LENGTH_SHORT ).show();
-
+                String dial = "tel:" + mPhone.get(position);
+                mContex.startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
             }
         });
     }

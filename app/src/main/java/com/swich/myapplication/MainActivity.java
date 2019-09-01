@@ -46,8 +46,7 @@ private static final int PERMISSINOS_STATE=1240;
     private ArrayList<String> mtype=new ArrayList<>();
     private ArrayList<String> mdate=new ArrayList<>();
     private ArrayList<String> mduration=new ArrayList<>();
-
-
+    private ArrayList<String> mPhone=new ArrayList<>();
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,13 +127,13 @@ if(checkAndRequestPermissions()){
 
     private  void  initRecyclerView(){
         RecyclerView recyler=findViewById(R.id.recycler_view);
-        RecyclerViewAdaptor adaptor=new RecyclerViewAdaptor(this,mNames,mImageUrls,mtype,mduration,mdate);
+        RecyclerViewAdaptor adaptor=new RecyclerViewAdaptor(this,mNames,mImageUrls,mtype,mduration,mdate,mPhone);
         recyler.setAdapter(adaptor);
         recyler.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
-    private void getCallDetails() {
+     public void getCallDetails() {
         StringBuffer sb = new StringBuffer();
         Cursor managedCursor = managedQuery(CallLog.Calls.CONTENT_URI, null, null, null, CallLog.Calls.DATE + " DESC");
         int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
@@ -173,7 +172,7 @@ if(checkAndRequestPermissions()){
             }else{
                 mNames.add(phNumber);
             }
-
+            mPhone.add(phNumber);
             mtype.add(dir);
             mdate.add(strDate);
 
@@ -201,6 +200,7 @@ if(checkAndRequestPermissions()){
         Uri uri=Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,Uri.encode(phoneNumber));
 
         String[] projection = new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME};
+
 
         String contactName="";
         Cursor cursor=context.getContentResolver().query(uri,projection,null,null,null);
