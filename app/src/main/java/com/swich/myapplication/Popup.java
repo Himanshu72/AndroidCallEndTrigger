@@ -1,13 +1,21 @@
 package com.swich.myapplication;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.hardware.display.DisplayManager;
 import android.os.Bundle;
+import android.provider.CallLog;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 public class Popup extends Activity {
     private Button btnY;
@@ -28,14 +36,20 @@ public class Popup extends Activity {
         btnY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
 
+                finish();
+                System.exit(0);
             }
         });
+
+
         btnN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
+
+                System.exit(0);
+
 
             }
         });

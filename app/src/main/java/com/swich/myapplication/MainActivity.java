@@ -41,11 +41,7 @@ public class MainActivity extends AppCompatActivity {
 private static final int PERMISSINOS_STATE=1240;
 
     private static final String TAG = "MainActivity";
-    private ArrayList<String> mNames=new ArrayList<>();
-    private ArrayList<String> mImageUrls=new ArrayList<>();
-    private ArrayList<String> mtype=new ArrayList<>();
-    private ArrayList<String> mdate=new ArrayList<>();
-    private ArrayList<String> mduration=new ArrayList<>();
+
 
 @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +53,8 @@ if(checkAndRequestPermissions()){
 
 
     //textView = (TextView) findViewById(R.id.textview_call);
-    getCallDetails();
+    //getCallDetails();
+    initRecyclerView();
     //initImageBitmaps();
     final Intent intents = new Intent(this, Popup.class);
 
@@ -129,65 +126,12 @@ if(checkAndRequestPermissions()){
 
     private  void  initRecyclerView(){
         RecyclerView recyler=findViewById(R.id.recycler_view);
-        RecyclerViewAdaptor adaptor=new RecyclerViewAdaptor(this,mNames,mImageUrls,mtype,mduration,mdate);
+        RecyclerViewAdaptor adaptor=new RecyclerViewAdaptor(this);
         recyler.setAdapter(adaptor);
         recyler.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
-     public void getCallDetails() {
-        Cursor managedCursor = managedQuery(CallLog.Calls.CONTENT_URI, null, null, null, CallLog.Calls.DATE + " DESC");
-        int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
-        int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
-        int date = managedCursor.getColumnIndex(CallLog.Calls.DATE);
-        int duration = managedCursor.getColumnIndex(CallLog.Calls.DURATION);
-       // sb.append("Call Log :");
-        while (managedCursor.moveToNext()) {
-            String phNumber = managedCursor.getString(number);
-            String callType = managedCursor.getString(type);
-            String callDate = managedCursor.getString(date);
-            SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
-            Date callDayTime = new Date(Long.valueOf(callDate));
-            String strDate=sf.format(callDayTime);
-
-
-            String callDuration = managedCursor.getString(duration);
-            String dir = null;
-            int dircode = Integer.parseInt(callType);
-            switch (dircode) {
-                case CallLog.Calls.OUTGOING_TYPE:
-                    dir = "OUTGOING";
-                    break;
-                case CallLog.Calls.INCOMING_TYPE:
-                    dir = "INCOMING";
-                    break;
-                case CallLog.Calls.MISSED_TYPE:
-                    dir = "MISSED";
-                    break;
-            }
-            mImageUrls.add("https://upload.wikimedia.org/wikipedia/commons/b/b7/Google_Contacts_logo.png");
-            mNames.add(phNumber);
-            mtype.add(dir);
-            mdate.add(strDate);
-
-            long longVal=Long.parseLong(callDuration);
-            int hours = (int) longVal / 3600;
-            int remainder = (int) longVal - hours * 3600;
-            int mins = remainder / 60;
-            remainder = remainder - mins * 60;
-            int secs = remainder;
-            if(hours > 0) {
-                callDuration = hours + "hr " + mins + "min " + secs + "sec";
-            }else if(mins >0){
-                callDuration=mins+"min "+secs+"sec";
-            }else{
-                callDuration=secs+"sec";
-            }
-            mduration.add(callDuration);
-
-        }
-        initRecyclerView();
-    }
 
 
 }

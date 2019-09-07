@@ -1,8 +1,11 @@
 package com.swich.myapplication;
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -32,21 +38,78 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
     private  ArrayList<String> mPhone=new ArrayList<>();
     private Context mContex;
 
-    public RecyclerViewAdaptor( Context mContex,ArrayList<String> mImageNames, ArrayList<String> mImages,ArrayList<String> mType,ArrayList<String> mDuration,ArrayList<String> mDate ) {
-        this.mImageNames = mImageNames;
-        this.mImages = mImages;
-        this.mContex = mContex;
-        this.mType=mType;
-        this.mDate=mDate;
-        this.mDuration=mDuration;
+    public void getCallDetails(Context mContext) {
 
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
+            Cursor managedCursor = mContext.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, CallLog.Calls.DATE + " DESC");
+            int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
+            int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
+            int date = managedCursor.getColumnIndex(CallLog.Calls.DATE);
+            int duration = managedCursor.getColumnIndex(CallLog.Calls.DURATION);
+            // sb.append("Call Log :");
+            while (managedCursor.moveToNext()) {
+                String phNumber = managedCursor.getString(number);
+                String callType = managedCursor.getString(type);
+                String callDate = managedCursor.getString(date);
+                SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
+                Date callDayTime = new Date(Long.valueOf(callDate));
+                String strDate = sf.format(callDayTime);
+
+
+                String callDuration = managedCursor.getString(duration);
+                String dir = null;
+                int dircode = Integer.parseInt(callType);
+                switch (dircode) {
+                    case CallLog.Calls.OUTGOING_TYPE:
+                        dir = "OUTGOING";
+                        break;
+                    case CallLog.Calls.INCOMING_TYPE:
+                        dir = "INCOMING";
+                        break;
+                    case CallLog.Calls.MISSED_TYPE:
+                        dir = "MISSED";
+                        break;
+                }
+                mImages.add("https://upload.wikimedia.org/wikipedia/commons/b/b7/Google_Contacts_logo.png");
+                mImageNames.add(phNumber);
+                mType.add(dir);
+                mDate.add(strDate);
+
+                long longVal = Long.parseLong(callDuration);
+                int hours = (int) longVal / 3600;
+                int remainder = (int) longVal - hours * 3600;
+                int mins = remainder / 60;
+                remainder = remainder - mins * 60;
+                int secs = remainder;
+                if (hours > 0) {
+                    callDuration = hours + "hr " + mins + "min " + secs + "sec";
+                } else if (mins > 0) {
+                    callDuration = mins + "min " + secs + "sec";
+                } else {
+                    callDuration = secs + "sec";
+                }
+                mDuration.add(callDuration);
+
+            }
+        }
     }
+
+
+
+
+
+public  RecyclerViewAdaptor(Context mContex)
+{
+this.mContex=mContex;
+getCallDetails(mContex);
+}
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem,parent,false);
         ViewHolder holder=new ViewHolder(view);
+
         return holder;
     }
 
@@ -123,6 +186,7 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
 
 
     }
+
 
 
 }
