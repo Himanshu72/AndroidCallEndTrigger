@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -48,12 +49,30 @@ private static final int PERMISSINOS_STATE=1240;
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+    String ph1,ph2;
+
+    SharedPreferences prefs = getSharedPreferences("swich_info", MODE_PRIVATE);
+
+
     requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
     getSupportActionBar().hide(); // hide the title bar
         setContentView(R.layout.activity_main);
 
 if(checkAndRequestPermissions()){
 
+    int count= prefs.getInt("count", 0); //0 is the default value.
+    if(count==0) {
+        Intent intent = new Intent(this, registration.class);
+        startActivity(intent);
+    }else if(count==1){
+        ph1=prefs.getString("ph1","null");
+
+    }else if(count==2){
+        ph1=prefs.getString("ph1","null");
+        ph2=prefs.getString("ph2","null");
+        Log.d("ph2",ph2);
+
+    }
 
     //textView = (TextView) findViewById(R.id.textview_call);
     //getCallDetails();

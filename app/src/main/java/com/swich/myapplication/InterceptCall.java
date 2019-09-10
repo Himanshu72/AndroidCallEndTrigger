@@ -7,8 +7,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.telephony.TelephonyManager;
@@ -17,19 +19,40 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class InterceptCall extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         String state=intent.getStringExtra(TelephonyManager.EXTRA_STATE);
         final TelephonyManager tMgr = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        SharedPreferences prefs = context.getSharedPreferences("swich_info", MODE_PRIVATE);
+            if(prefs.getInt("count",0)==0){
+                System.exit(0);
+            }
 
-       if (ContextCompat.checkSelfPermission(context,Manifest.permission.READ_PHONE_STATE)==PackageManager.PERMISSION_GRANTED) {
-           String getSimSerialNumber = tMgr.getSimSerialNumber();
+            TelephonyInfo tel=TelephonyInfo.getInstance(context);
+           // Log.d("Himanshu sim",String.valueOf(tel.getImeiSIM1()));
+        Bundle bundle = intent.getExtras();
+         String callingSIM =String.valueOf(bundle.getInt("simId", -1));
+         if(callingSIM=="0"){
 
+             Toast.makeText(context,"1",Toast.LENGTH_LONG).show();
+         }else if(callingSIM=="1"){
 
-           Log.d("himanshu serial",getSimSerialNumber);
-       }
+             Toast.makeText(context,"2",Toast.LENGTH_LONG).show();
+
+         }
+
+            if (ContextCompat.checkSelfPermission(context,Manifest.permission.READ_PHONE_STATE)==PackageManager.PERMISSION_GRANTED) {
+
+           String getSimSerialNumber = tMgr.getSimOperatorName();
+
+      //  Toast.makeText(context,getSimSerialNumber,Toast.LENGTH_LONG).show();
+
+          }
+
 
         try{
                if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE)) {
@@ -82,13 +105,14 @@ public class InterceptCall extends BroadcastReceiver {
 
 
                                    if(ph1[0].equals(ph2[0]) && ph1[0]!=null ){
-                                       Toast.makeText(context,String.valueOf(( ((d1[0]-d2[0])/1000)-callD[0]) ),Toast.LENGTH_LONG).show();
+                             //          Toast.makeText(context,String.valueOf(( ((d1[0]-d2[0])/1000)-callD[0]) ),Toast.LENGTH_LONG).show();
                                        if( ( ((d1[0]-d2[0])/1000)-callD[0])<=31  && d1[0]!=0) {
                                            intents.putExtra("NO1",ph1[0] );
                                            intents.putExtra("NO2","phone number");
                                            intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                            intents.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                            context.startActivity(intents);
+
                                        }
 
                                    }
