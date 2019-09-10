@@ -3,6 +3,7 @@ package com.swich.myapplication;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -28,9 +29,10 @@ import java.util.List;
 public class Popup extends Activity {
     private Button btnY;
     private  Button btnN;
-    String active;
+    String active1,active2;
     Spinner spin;
     List<String> phs=new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +48,20 @@ public class Popup extends Activity {
         spin = (Spinner) findViewById(R.id.list);
         btnN=findViewById(R.id.no);
 
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+        if(b!=null)
+        {
+            active2 =(String) b.get("No1");
+
+        }
+
+
         SharedPreferences prefs = getSharedPreferences("swich_info", MODE_PRIVATE);
         if(prefs.getInt("count",0)==0){
             finish();
         }
-        active=prefs.getString("ph1","");
+
 
         if(prefs.getInt("count",0)==1)
         {
@@ -69,8 +80,9 @@ public class Popup extends Activity {
             @Override
             public void onClick(View view) {
 
-              active=String.valueOf(spin.getSelectedItem());
-            Log.d("phone",active);
+              active1=String.valueOf(spin.getSelectedItem());
+            Log.d("phone1",active1);
+            Log.d("phone2",active2);
 
                 finish();
                 System.exit(0);
