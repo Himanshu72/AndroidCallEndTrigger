@@ -130,12 +130,14 @@ getCallDetails(mContex);
 
         holder.duration.setText(mDuration.get(position));
 
-        if(mType.get(position).equals("MISSED")){
+        if(mType.get(position)=="MISSED"){
 
       holder.type.setTextColor(Color.RED);
-        }else if(mType.get(position).equals("INCOMING")){
+        }else if(mType.get(position)=="INCOMING"){
 
             holder.type.setTextColor(Color.BLUE);
+        }else{
+
         }
 
         holder.type.setText(mType.get(position));
