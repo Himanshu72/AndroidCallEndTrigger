@@ -3,6 +3,7 @@
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:padding="10dp"
     android:id="@+id/parent_layout"
+    android:background="@drawable/border"
 >
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -35,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/child"
+
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +69,7 @@
             ></TextView>
 
 
-    </LinearLayout>
+    </LinearLayout >
 
 
 </RelativeLayout>

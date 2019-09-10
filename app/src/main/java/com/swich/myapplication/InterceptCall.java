@@ -22,6 +22,15 @@ public class InterceptCall extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         String state=intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+        final TelephonyManager tMgr = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+
+       if (ContextCompat.checkSelfPermission(context,Manifest.permission.READ_PHONE_STATE)==PackageManager.PERMISSION_GRANTED) {
+           String getSimSerialNumber = tMgr.getSimSerialNumber();
+
+
+           Log.d("himanshu serial",getSimSerialNumber);
+       }
+
         try{
                if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE)) {
                    //Toast.makeText(context, "phone Ended", Toast.LENGTH_LONG).show();
@@ -75,6 +84,8 @@ public class InterceptCall extends BroadcastReceiver {
                                    if(ph1[0].equals(ph2[0]) && ph1[0]!=null ){
                                        Toast.makeText(context,String.valueOf(( ((d1[0]-d2[0])/1000)-callD[0]) ),Toast.LENGTH_LONG).show();
                                        if( ( ((d1[0]-d2[0])/1000)-callD[0])<=31  && d1[0]!=0) {
+                                           intents.putExtra("NO1",ph1[0] );
+                                           intents.putExtra("NO2","phone number");
                                            intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                            intents.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                            context.startActivity(intents);

@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,8 +46,10 @@ private static final int PERMISSINOS_STATE=1240;
 
 @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
+    requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+    getSupportActionBar().hide(); // hide the title bar
         setContentView(R.layout.activity_main);
 
 if(checkAndRequestPermissions()){

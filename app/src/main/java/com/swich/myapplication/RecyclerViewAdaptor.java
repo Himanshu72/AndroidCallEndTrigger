@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
@@ -126,7 +127,17 @@ getCallDetails(mContex);
         }else{
             holder.imageName.setText(mImageNames.get(position));
         }
+
         holder.duration.setText(mDuration.get(position));
+
+        if(mType.get(position).equals("MISSED")){
+
+      holder.type.setTextColor(Color.RED);
+        }else if(mType.get(position).equals("INCOMING")){
+
+            holder.type.setTextColor(Color.BLUE);
+        }
+
         holder.type.setText(mType.get(position));
         holder.date.setText(mDate.get(position));
 
