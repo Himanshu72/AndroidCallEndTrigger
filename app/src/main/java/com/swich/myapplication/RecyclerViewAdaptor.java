@@ -52,10 +52,9 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
                 String phNumber = managedCursor.getString(number);
                 String callType = managedCursor.getString(type);
                 String callDate = managedCursor.getString(date);
-                SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
                 Date callDayTime = new Date(Long.valueOf(callDate));
                 String strDate = sf.format(callDayTime);
-
 
                 String callDuration = managedCursor.getString(duration);
                 String dir = null;
@@ -136,8 +135,8 @@ getCallDetails(mContex);
         }else if(mType.get(position)=="INCOMING"){
 
             holder.type.setTextColor(Color.BLUE);
-        }else{
-
+        }else {
+            holder.type.setTextColor(Color.GREEN);
         }
 
         holder.type.setText(mType.get(position));
@@ -149,6 +148,7 @@ getCallDetails(mContex);
                 Log.d(TAG,"oncliked ok"+mImageNames.get(position)  );
                 String dial = "tel:" + mImageNames.get(position);
                 mContex.startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
+                System.exit(0);
             }
         });
     }

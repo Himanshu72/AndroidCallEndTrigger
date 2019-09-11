@@ -30,6 +30,7 @@ public class Popup extends Activity {
     private Button btnY;
     private  Button btnN;
     String active1,active2;
+    String dur,date;
     Spinner spin;
     List<String> phs=new ArrayList<>();
 
@@ -48,12 +49,14 @@ public class Popup extends Activity {
         spin = (Spinner) findViewById(R.id.list);
         btnN=findViewById(R.id.no);
 
+
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
         if(b!=null)
         {
             active2 =(String) b.get("No1");
-
+            dur=(String) b.get("du") ;
+            date=(String) b.get("date");
         }
 
 
@@ -81,8 +84,12 @@ public class Popup extends Activity {
             public void onClick(View view) {
 
               active1=String.valueOf(spin.getSelectedItem());
-            Log.d("phone1",active1);
-            Log.d("phone2",active2);
+              Long timestamp=Long.valueOf(date)+Long.valueOf(dur)  ;
+
+            Log.d("himanshu","+91"+active1);
+            Log.d("himanshu",active2);
+            Log.d("himanshu",String.valueOf(timestamp));
+           // Log.d("himanshu",dur);
 
                 finish();
                 System.exit(0);

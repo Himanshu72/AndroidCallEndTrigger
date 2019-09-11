@@ -19,12 +19,14 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
+import java.text.SimpleDateFormat;
+
 import static android.content.Context.MODE_PRIVATE;
 
 
 public class InterceptCall extends BroadcastReceiver {
     @Override
-    public void onReceive(final Context context, Intent intent) {
+    public void onReceive(final Context context, final Intent intent) {
         String state=intent.getStringExtra(TelephonyManager.EXTRA_STATE);
         final TelephonyManager tMgr = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
         SharedPreferences prefs = context.getSharedPreferences("swich_info", MODE_PRIVATE);
@@ -65,7 +67,10 @@ public class InterceptCall extends BroadcastReceiver {
                    final String[] ph2 = {null};
                    final double[] d1 = {0};
                    final double[] d2 = {0};
-                   final int[] callD = {0};
+                   final double[] callD = {0};
+                   final  double[]callD2={0};
+                   final String acivedate[]={null};
+                   final String acivedur[]={null};
 
 
 
@@ -96,8 +101,11 @@ public class InterceptCall extends BroadcastReceiver {
 
                                    if(count==2){
                                     ph2[0] =managedCursor.getString(number);
-                                       d2[0]= managedCursor.getDouble(date);
-                                       break;
+                                    acivedate[0] = managedCursor.getString(date);
+                                    d2[0]=Long.valueOf(acivedate[0]);
+                                    acivedur[0]=managedCursor.getString(duration);
+                                    callD2[0]=Integer.valueOf(acivedur[0]);
+                                    break;
                                  }
 
 
@@ -105,13 +113,21 @@ public class InterceptCall extends BroadcastReceiver {
 
 
                                    if(ph1[0].equals(ph2[0]) && ph1[0]!=null ){
-                             //          Toast.makeText(context,String.valueOf(( ((d1[0]-d2[0])/1000)-callD[0]) ),Toast.LENGTH_LONG).show();
-                                       if( ( ((d1[0]-d2[0])/1000)-callD[0])<=31  && d1[0]!=0) {
+                                      //Toast.makeText(context,String.valueOf( ),Toast.LENGTH_LONG).show();
+                                       if( ((d1[0]-d2[0])/1000)-callD2[0]<=31  && d1[0]!=0) {
                                            intents.putExtra("No1",ph1[0] );
+
+                                           intents.putExtra("date",acivedate[0]);
+                                           intents.putExtra("du",acivedur[0] );
+
+
+                                           // Log.d("datenow",acivedate[0]);
+
 
                                            intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                            intents.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                            context.startActivity(intents);
+                                           //System.exit(0);
 
                                        }
 
