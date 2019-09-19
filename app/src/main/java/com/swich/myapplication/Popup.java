@@ -88,7 +88,7 @@ public class Popup extends Activity {
               active1=String.valueOf(spin.getSelectedItem());
               Long timestamp=Long.valueOf(date)+Long.valueOf(dur)  ;
                 SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
-                SimpleDateFormat sf2=new SimpleDateFormat("HH:mm:ssr");
+                SimpleDateFormat sf2=new SimpleDateFormat("HH:mm:ssr    ");
 
                 Date callDayTime = new Date(timestamp);
                 String strDate = sf.format(callDayTime);
