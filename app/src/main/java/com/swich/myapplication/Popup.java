@@ -111,9 +111,17 @@ public class Popup extends Activity {
 
 
                 reff.push().setValue(calldrop);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+                        finish();
+                        System.exit(0);
 
-                  finish();
-              System.exit(0);
+                    }
+                }, 1000);
+
+
             }
         });
 
