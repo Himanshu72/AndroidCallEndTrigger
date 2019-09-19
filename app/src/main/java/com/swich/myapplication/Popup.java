@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.hardware.display.DisplayManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.CallLog;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
@@ -23,6 +24,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +39,7 @@ public class Popup extends Activity {
     String dur,date;
     Spinner spin;
     List<String> phs=new ArrayList<>();
-
+    DatabaseReference reff;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +55,7 @@ public class Popup extends Activity {
         spin = (Spinner) findViewById(R.id.list);
         btnN=findViewById(R.id.no);
 
-
+        reff= FirebaseDatabase.getInstance().getReference().child("Member");
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
         if(b!=null)
@@ -80,32 +84,36 @@ public class Popup extends Activity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, phs);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
+        final CallDrop calldrop=new CallDrop();
+        final Handler handler = new Handler();
 
         btnY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-              active1=String.valueOf(spin.getSelectedItem());
-              Long timestamp=Long.valueOf(date)+Long.valueOf(dur)  ;
-                SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
-                SimpleDateFormat sf2=new SimpleDateFormat("HH:mm:ssr    ");
 
+                Log.d("here",active2);
+                calldrop.setPersonPH(active2);
+                active1=String.valueOf(spin.getSelectedItem());
+                Log.d("here",active1);
+                calldrop.setHostPH("+91"+active1);
+                Long timestamp=Long.valueOf(date)+Long.valueOf(dur);
+                SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
                 Date callDayTime = new Date(timestamp);
                 String strDate = sf.format(callDayTime);
-                String strTime=sf2.format(timestamp);
+                Log.d("here",strDate);
+                calldrop.setDate(strDate);
+                SimpleDateFormat sf2=new SimpleDateFormat("HH:mm:ss");
+                String strDur = sf2.format(callDayTime);
+                Log.d("here",strDur);
+                calldrop.setTime(strDur);
 
 
 
-            Log.d("himanshu","+91"+active1);
-            Log.d("himanshu",active2);
-            Log.d("himanshu",strDate);
-            Log.d("himanshu",strTime);
+                reff.push().setValue(calldrop);
 
-
-                // Log.d("himanshu",dur);
-
-                finish();
-                System.exit(0);
+                  finish();
+              System.exit(0);
             }
         });
 

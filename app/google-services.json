@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "738788261962",
+    "firebase_url": "https://androidcallendtrigger.firebaseio.com",
+    "project_id": "androidcallendtrigger",
+    "storage_bucket": "androidcallendtrigger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738788261962:android:7d38747c93858517e466b3",
+        "android_client_info": {
+          "package_name": "com.swich.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738788261962-3dmsvtlul848mo2qmi2vo9sb1h4n2vts.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.swich.myapplication",
+            "certificate_hash": "d8466891925a7dba5e16dd2070b8af6e69d722d3"
+          }
+        },
+        {
+          "client_id": "738788261962-1b45o6v829kpd2ent7ok5clung6hjll6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5EADDfPSsxAaRm5Ve4YUTPz6zjA9noN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738788261962-1b45o6v829kpd2ent7ok5clung6hjll6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
