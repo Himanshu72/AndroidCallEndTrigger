@@ -86,11 +86,11 @@ public class Popup extends Activity {
         spin.setAdapter(adapter);
         final CallDrop calldrop=new CallDrop();
         final Handler handler = new Handler();
-
+        final int[] count = {0};
         btnY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                count[0]++;
 
                 Log.d("here",active2);
                 calldrop.setPersonPH(active2);
@@ -109,8 +109,10 @@ public class Popup extends Activity {
                 calldrop.setTime(strDur);
 
 
+                if(count[0]==1) {
+                    reff.push().setValue(calldrop);
+                }
 
-                reff.push().setValue(calldrop);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".registration"
     >
 
@@ -80,6 +81,7 @@
         android:layout_below="@+id/error"
         android:text="submit"
         android:id="@+id/sub"
+        android:background="@drawable/button_background"
         android:layout_marginTop="10dp"/>
 
 </RelativeLayout>

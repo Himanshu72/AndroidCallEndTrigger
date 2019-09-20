@@ -3,6 +3,7 @@
     android:layout_width="wrap_content" android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:padding="10dp"
+    android:background="@drawable/gradient_background"
     >
 
 
@@ -46,13 +47,17 @@
     android:layout_height="wrap_content"
     android:text="Yes"
     android:id="@+id/yes"
-    android:layout_marginRight="10dp"></Button>
+    android:layout_marginRight="10dp"
+    android:background="@drawable/button_background"
+    ></Button>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="No"
-            android:id="@+id/no"></Button>
+            android:id="@+id/no"
+            android:background="@drawable/button_background"
+            ></Button>
 
     </LinearLayout>
 

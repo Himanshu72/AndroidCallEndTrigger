@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">DoT- Call Drop</string>
+    <string name="welcome_to_dot_portal">Welcome to DoT Portal</string>
+    <string name="description_1">If you have experienced Call Drop during any of your call, you can register your \ninformation here.</string>
+    <string name="description_2">Kindly note that information can be registered with the same mobile number on which Call Drop happened.</string>
+    <string name="description_3">Note: If department finds your information misleading then action may be initiated against you as per Law.</string>
+    <string name="proceed">PROCEED</string>
+    <string name="DoT_info">Department of Telecommunications\nMinistry of Communications\nGovernment of India</string>
+    <string name="email_hint">Email*</string>
+    <string name="password_hint">Password* (minimum 6 characters)</string>
+    <string name="login_button">LOGIN</string>
+    <string name="or">OR</string>
+    <string name="create_account">CREATE ACCOUNT</string>
+    <string name="first_name">First Name*</string>
+    <string name="last_name">Last Name</string>
+    <string name="phoneno">Phone Number* (10 digits)</string>
+    <string name="note">NOTE:- All fields marked with an asterisk(*) are mandatory</string>
 </resources>

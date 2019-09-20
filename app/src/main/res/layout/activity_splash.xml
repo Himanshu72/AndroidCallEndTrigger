@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="top">
+
+        <ImageView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/transparent_header"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="558dp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/adamina"
+            android:text="@string/welcome_to_dot_portal"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@color/saffron"
+            android:fontFamily="@font/adamina"
+            android:text="@string/description_1"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp"></TextView>
+
+        <TextView
+            android:id="@+id/description_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:fontFamily="@font/adamina"
+            android:text="@string/description_2"
+            android:textAlignment="center"
+            android:textColor="@color/navyBlue"
+            android:textSize="15sp"></TextView>
+
+        <TextView
+            android:id="@+id/description_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/green"
+            android:fontFamily="@font/adamina"
+            android:text="@string/description_3"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp"></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_layout_3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/proceed_button"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/adamina"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:padding="4dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="@string/proceed"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
