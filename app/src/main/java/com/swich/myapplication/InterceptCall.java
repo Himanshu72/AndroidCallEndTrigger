@@ -40,10 +40,10 @@ public class InterceptCall extends BroadcastReceiver {
          String callingSIM =String.valueOf(bundle.getInt("simId", -1));
          if(callingSIM=="0"){
 
-             Toast.makeText(context,"1",Toast.LENGTH_LONG).show();
+            // Toast.makeText(context,"1",Toast.LENGTH_LONG).show();
          }else if(callingSIM=="1"){
 
-             Toast.makeText(context,"2",Toast.LENGTH_LONG).show();
+            // Toast.makeText(context,"2",Toast.LENGTH_LONG).show();
 
          }
 

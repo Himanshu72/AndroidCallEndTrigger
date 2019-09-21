@@ -24,12 +24,26 @@
             android:background="@drawable/transparent_header"/>
 
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:fontFamily="@font/adamina"
+        android:text="This application is for testing purpose only, do not install it without prior permission."
+        android:layout_below="@+id/linear_layout_1"
+        android:background="@drawable/button_background"
+        android:gravity="center"
+        android:id="@+id/note"
+        android:layout_centerHorizontal="true"
+
+        ></TextView>
 
     <LinearLayout
         android:id="@+id/linear_layout_2"
         android:layout_width="match_parent"
-        android:layout_height="558dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_below="@+id/note"
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:padding="8dp">
@@ -82,12 +96,59 @@
             android:textSize="15sp"></TextView>
     </LinearLayout>
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linear_layout_2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Himanshu Joshi"
+            android:textColor="#fff"
+            android:fontFamily="@font/adamina"
+            android:background="@drawable/round"
+            android:padding="4dp"
+
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Niharika Srivastava"
+            android:textColor="@color/navyBlue"
+            android:fontFamily="@font/adamina"
+            android:background="@drawable/round2"
+            android:padding="4dp"
+
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Naveen Jakhar"
+            android:textColor="#fff"
+            android:fontFamily="@font/adamina"
+            android:background="@drawable/round3"
+            android:padding="4dp"
+
+
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/linear_layout_3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="8dp"
-        android:gravity="bottom">
+        android:gravity="bottom"
+
+        >
 
         <Button
             android:id="@+id/proceed_button"
