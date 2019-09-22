@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class InterceptCall extends BroadcastReceiver {
+public class InterceptCall extends BroadcastReceiver  {
     @Override
     public void onReceive(final Context context, final Intent intent) {
         String state=intent.getStringExtra(TelephonyManager.EXTRA_STATE);
@@ -71,6 +71,10 @@ public class InterceptCall extends BroadcastReceiver {
                    final  double[]callD2={0};
                    final String acivedate[]={null};
                    final String acivedur[]={null};
+
+
+
+
 
 
 
@@ -165,4 +169,5 @@ public class InterceptCall extends BroadcastReceiver {
             e.printStackTrace();
         }
     }
+
 }

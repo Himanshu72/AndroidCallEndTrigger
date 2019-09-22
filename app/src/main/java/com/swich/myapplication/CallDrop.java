@@ -6,43 +6,43 @@ public class CallDrop {
 //            Log.d("himanshu",strDate);
 //            Log.d("himanshu",strTime);
 
-private String hostPH;
-private  String personPH;
-private  String date;
-private  String time;
+private String Host_Phone_Number;
+private  String Other_Phone_Number;
+private  String Call_Drop_Date;
+private  String Call_Drop_Time;
 CallDrop(){
 
 }
 
-    public String getHostPH() {
-        return hostPH;
+    public String getHost_Phone_Number() {
+        return Host_Phone_Number;
     }
 
-    public void setHostPH(String hostPH) {
-        this.hostPH = hostPH;
+    public void setHost_Phone_Number(String host_Phone_Number) {
+        Host_Phone_Number = host_Phone_Number;
     }
 
-    public String getPersonPH() {
-        return personPH;
+    public String getOther_Phone_Number() {
+        return Other_Phone_Number;
     }
 
-    public void setPersonPH(String personPH) {
-        this.personPH = personPH;
+    public void setOther_Phone_Number(String other_Phone_Number) {
+        Other_Phone_Number = other_Phone_Number;
     }
 
-    public String getDate() {
-        return date;
+    public String getCall_Drop_Date() {
+        return Call_Drop_Date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCall_Drop_Date(String call_Drop_Date) {
+        Call_Drop_Date = call_Drop_Date;
     }
 
-    public String getTime() {
-        return time;
+    public String getCall_Drop_Time() {
+        return Call_Drop_Time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setCall_Drop_Time(String call_Drop_Time) {
+        Call_Drop_Time = call_Drop_Time;
     }
 }
